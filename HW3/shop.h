@@ -75,10 +75,12 @@ public:
 		}
 
 		os << "**********************" << std::endl;
+		total = (total / 100) * 108;
 		os << "Total cost:" << total << std::endl;
 
 		if (m.discount_ != 0)
 		{
+
 			os << "Discount\t: %" << m.discount_ << endl;
 			os << "Discount amount\t: -" << (total / 100) * m.discount_ << endl;
 			total = total - ((total / 100) * m.discount_);
@@ -89,21 +91,34 @@ public:
 		return os;
 	}
 
+	T& operator[](int i) // Operator [] overload
+	{
+		if (i >= 0 && i < size) // Correct index control
+		{
+			return elements[i];
+		}
+		else
+		{
+			string error;
+			error = "Index out of bounds!";
+			throw error;
+		}
+	}
 
-	friend double &operator<<(double &total_cost, const Shop<T>& m) // Overload << operator for calculating  multiple trips cost
+	/*friend double &operator<<(double &total_cost, const Shop<T>& m) // Overload << operator for calculating  multiple cost
 	{
 		for (int i = 0; i < m->size; i++)
 		{
 			total_cost << m->elements[i];
 		}
 
-		if (m->discount != 0) // We passed discounted cost to next trip in multiple trips 
+		if (m->discount != 0)
 		{
 			total_cost = total_cost - ((total_cost / 100) * m->discount_);
 		}
 
 		return total_cost;
-	}
+	}*/
 private:
 	T *elements;
 	float discount_;

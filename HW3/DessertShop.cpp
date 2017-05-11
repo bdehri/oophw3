@@ -17,7 +17,17 @@ int main() {
 	cout << cookieShop << endl;
 
 	//Catch an exception here while trying to access the element at(2)
-   // cout << cookieShop[2] << endl;
+	try
+	{
+		cout << cookieShop[2] << endl;
+	}
+	catch (const string & err_msg)
+	{
+
+		cout << err_msg << endl;
+		cout << "**********************" << endl;
+
+	}
 
 	Icecream icecream1("Chocolate ice cream", 1.5, 170); //(name, litre, priceperlitre)
 	Shop<Icecream> icecreamShop(icecream1);
